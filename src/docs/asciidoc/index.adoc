@@ -1,0 +1,35 @@
+ifndef::snippets[]
+:snippets: ./build/generated-snippets
+endif::[]
+= 신규 프로젝트 회원 정보
+:doctype: book
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 2
+
+== 회원정보
+****
+
+****
+=== Request Params
+include::{snippets}/get-member/request-fields.adoc[]
+=== Response Params
+include::{snippets}/get-member/response-fields.adoc[]
+=== Request
+include::{snippets}/get-member/http-request.adoc[]
+=== Response
+include::{snippets}/get-member/http-response.adoc[]
+
+
+== 회원정보 Post
+****
+
+****
+=== Request Params
+include::{snippets}/get-member-post/request-fields.adoc[]
+=== Response Params
+include::{snippets}/get-member-post/response-fields.adoc[]
+=== Request
+include::{snippets}/get-member-post/http-request.adoc[]
+=== Response
+include::{snippets}/get-member-post/http-response.adoc[]
