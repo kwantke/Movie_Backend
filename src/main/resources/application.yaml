@@ -14,15 +14,17 @@ spring:
     show-sql: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.PostgreSQL82Dialect
+       # dialect: org.hibernate.dialect.PostgreSQL82Dialect
+        dialect: org.hibernate.dialect.MySQL8Dialect
         format_sql: true
         use_sql_comments: true
-        default_schema: test
+        default_schema: movieapi
 
   datasource:
     driver-class-name: net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-    url: jdbc:log4jdbc:postgresql://postgre-db.cfh61qv9x1da.us-west-2.rds.amazonaws.com:5432/postgre_db
-    username: postgres
+    #     url: jdbc:log4jdbc:postgresql://postgre-db.cfh61qv9x1da.us-west-2.rds.amazonaws.com:5432/postgre_db
+    url: jdbc:log4jdbc:mysql://database-1.cfh61qv9x1da.us-west-2.rds.amazonaws.com:3306/movieapi
+    username: admin
     password: adminadmin01
 
 #logging:

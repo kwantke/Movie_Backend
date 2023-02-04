@@ -1,6 +1,7 @@
 package kr.or.kkwk;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
@@ -48,6 +49,7 @@ public class MemberApplicationTest {
     }
 
     @Test
+    @DisplayName("내 정보 조회 성공 테스트 (토큰이 올바른 경우)")
     public void getMemeberPostTest() throws Exception {
        // MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
         Map<String, String> input = new HashMap<>();

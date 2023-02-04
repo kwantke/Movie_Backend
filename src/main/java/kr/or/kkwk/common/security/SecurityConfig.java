@@ -11,6 +11,11 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
+
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 @EnableWebSecurity
 @RequiredArgsConstructor
@@ -27,13 +32,18 @@ public class SecurityConfig {
 
     return httpSecurity
             .httpBasic().disable()
-            .cors().configurationSource(corsConfigurationSource())
+            .cors().configurationSource(request -> {
+              var cors = new CorsConfiguration();
+              cors.setAllowedOrigins(List.of("http://localhost:3000"));
+              cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+              cors.setAllowedHeaders(List.of("*")); return cors;
+            })
             .and()
             .csrf().disable()
             .cors().and()
             .headers().frameOptions().disable().and()
             .authorizeRequests()
-            .antMatchers("/login").permitAll()
+            .antMatchers("/login","/save").permitAll()
             .antMatchers("/api/**").authenticated()
             .anyRequest().authenticated().and()
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
@@ -41,17 +51,23 @@ public class SecurityConfig {
   }
 
   @Bean
-  public CorsConfigurationSource corsConfigurationSource(){
-
+  CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-
-    configuration.addAllowedOrigin("*");
-    configuration.addAllowedHeader("*");
-    configuration.addAllowedMethod("*");
-    configuration.setAllowCredentials(true);
+    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+    configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+    // you can configure many allowed CORS headers
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
     source.registerCorsConfiguration("/**", configuration);
     return source;
   }
+
+  /*CorsConfigurationSource corsConfigurationSource() {
+    CorsConfiguration configuration = new CorsConfiguration();
+    configuration.setAllowedOrigins(Arrays.asList("https://example.com"));
+    configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+    UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+    source.registerCorsConfiguration("/**", configuration);
+    return source;
+  }*/
 }
