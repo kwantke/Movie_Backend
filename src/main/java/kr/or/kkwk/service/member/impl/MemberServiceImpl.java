@@ -1,4 +1,4 @@
-package kr.or.kkwk.service.impl;
+package kr.or.kkwk.service.member.impl;
 
 
 import kr.or.kkwk.common.exceptio2.ApiException;
@@ -7,10 +7,10 @@ import kr.or.kkwk.common.security.JwtAuthToken;
 import kr.or.kkwk.common.security.JwtAuthTokenProvider;
 import kr.or.kkwk.common.security.PasswordAuthenticationToken;
 import kr.or.kkwk.mapper.MemberMapper;
-import kr.or.kkwk.model.entity.MemberEntity;
-import kr.or.kkwk.model.dto.MemberDto;
-import kr.or.kkwk.repository.MemberRepository;
-import kr.or.kkwk.service.MemberService;
+import kr.or.kkwk.model.entity.member.MemberEntity;
+import kr.or.kkwk.model.dto.member.MemberDto;
+import kr.or.kkwk.repository.member.MemberRepository;
+import kr.or.kkwk.service.member.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.Authentication;

@@ -1,6 +1,6 @@
 package kr.or.kkwk.mapper;
 
-import kr.or.kkwk.model.dto.MemberDto;
+import kr.or.kkwk.model.dto.member.MemberDto;
 import org.apache.ibatis.annotations.Mapper;
 
 

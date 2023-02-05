@@ -1,8 +1,8 @@
-package kr.or.kkwk.service;
+package kr.or.kkwk.service.member;
 
 
 
-import kr.or.kkwk.model.dto.MemberDto;
+import kr.or.kkwk.model.dto.member.MemberDto;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

@@ -1,6 +1,6 @@
-package kr.or.kkwk.model.entity;
+package kr.or.kkwk.model.entity.member;
 
-import kr.or.kkwk.model.dto.MemberDto;
+import kr.or.kkwk.model.dto.member.MemberDto;
 
 import lombok.*;
 import org.springframework.beans.BeanUtils;

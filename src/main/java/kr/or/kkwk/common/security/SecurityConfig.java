@@ -43,7 +43,7 @@ public class SecurityConfig {
             .cors().and()
             .headers().frameOptions().disable().and()
             .authorizeRequests()
-            .antMatchers("/login","/save").permitAll()
+            .antMatchers("/login","/save","/getMovieSection","/getMovieList").permitAll()
             .antMatchers("/api/**").authenticated()
             .anyRequest().authenticated().and()
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)

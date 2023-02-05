@@ -1,11 +1,11 @@
-package kr.or.kkwk.controller;
+package kr.or.kkwk.controller.member;
 
 
 
 import kr.or.kkwk.common.exceptio2.ApiException;
 import kr.or.kkwk.common.exceptio2.ExceptionEnum;
-import kr.or.kkwk.model.dto.MemberDto;
-import kr.or.kkwk.service.MemberService;
+import kr.or.kkwk.model.dto.member.MemberDto;
+import kr.or.kkwk.service.member.MemberService;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +80,10 @@ public class MemberController {
         return token;
     }
 
-
+    /*@RequestMapping("/getSection")
+    public MovieSectionDto getSection(){
+        return
+    }
+*/
 
 }

@@ -1,6 +1,6 @@
-package kr.or.kkwk.repository;
+package kr.or.kkwk.repository.member;
 
-import kr.or.kkwk.model.entity.MemberEntity;
+import kr.or.kkwk.model.entity.member.MemberEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;

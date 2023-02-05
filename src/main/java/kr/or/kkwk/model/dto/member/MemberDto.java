@@ -1,6 +1,6 @@
-package kr.or.kkwk.model.dto;
+package kr.or.kkwk.model.dto.member;
 
-import kr.or.kkwk.model.entity.MemberEntity;
+import kr.or.kkwk.model.entity.member.MemberEntity;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

@@ -1,7 +1,7 @@
 package kr.or.kkwk.common.security;
 
-import kr.or.kkwk.model.entity.MemberEntity;
-import kr.or.kkwk.repository.MemberRepository;
+import kr.or.kkwk.model.entity.member.MemberEntity;
+import kr.or.kkwk.repository.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
