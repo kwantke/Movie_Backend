@@ -24,7 +24,7 @@ public class MovieEntity {
   private String type;
   private String score;
   private String star;
-  private String section;
+  private int section;
 
   public MovieEntity(MovieDto movieDto){
     BeanUtils.copyProperties(movieDto, this);

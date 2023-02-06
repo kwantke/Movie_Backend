@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -19,6 +20,7 @@ public class MovieSectionDto {
   char useYn;
   Date regDtm;
 
+  List<MovieDto> movieDtoList;
   public MovieSectionDto(int section, String sectionName, char useYn, Date regDtm){
     this.section=section;
     this.sectionName=sectionName;

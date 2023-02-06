@@ -16,7 +16,7 @@ public class MovieDto {
     private String type;
     private String score;
     private String star;
-    private String section;
+    private int section;
 
     public MovieEntity toEntity(){
         return MovieEntity.builder()

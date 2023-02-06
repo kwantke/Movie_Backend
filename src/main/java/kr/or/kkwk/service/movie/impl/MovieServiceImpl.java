@@ -36,6 +36,13 @@ public class MovieServiceImpl implements MovieService {
     List<MovieSectionDto> movieSectionDtoList = movieSectionEntitiesList
             .stream().map(MovieSectionEntity::toDomain).collect(Collectors.toList());
 
+
+    for(MovieSectionDto sectiondto : movieSectionDtoList){
+      Optional<List<MovieEntity>> movieEntityList = movieRepository.findBySection(sectiondto.getSection());
+      List<MovieDto> movieDtoList = movieEntityList.get().stream().map(MovieEntity::toDomain).collect(Collectors.toList());
+      sectiondto.setMovieDtoList(movieDtoList);
+    }
+
     return movieSectionDtoList;
   }
 
