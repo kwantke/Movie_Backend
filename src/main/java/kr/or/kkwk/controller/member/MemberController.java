@@ -80,6 +80,13 @@ public class MemberController {
         return token;
     }
 
+    @PostMapping("/login2")
+    public String login2(@RequestBody MemberDto memberVo) {
+       // String token = memberService.memberLogin(memberVo);
+
+        return "test";
+    }
+
     /*@RequestMapping("/getSection")
     public MovieSectionDto getSection(){
         return

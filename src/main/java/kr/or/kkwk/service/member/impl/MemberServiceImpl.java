@@ -83,8 +83,9 @@ public class MemberServiceImpl implements MemberService {
     PasswordAuthenticationToken token = new PasswordAuthenticationToken(memberVo.getId(),memberVo.getPassword());
     Authentication authentication = authenticationManager.authenticate(token);
     SecurityContextHolder.getContext().setAuthentication(authentication);
+    String userToken = createToken((PasswordAuthenticationToken) authentication);
 
-    return createToken((PasswordAuthenticationToken) authentication);
+    return userToken;
   }
 
   public String createToken(PasswordAuthenticationToken token){

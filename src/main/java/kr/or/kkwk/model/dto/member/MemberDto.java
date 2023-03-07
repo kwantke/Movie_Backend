@@ -16,13 +16,15 @@ public class MemberDto {
   String name;
   String password;
   String email;
+  String img;
 
 
-  public MemberDto(String id, String name, String password, String email){
+  public MemberDto(String id, String name, String password, String email, String img){
     this.id = id;
     this.name = name;
     this.password = password;
     this.email = email;
+    this.img = img;
   }
 
 

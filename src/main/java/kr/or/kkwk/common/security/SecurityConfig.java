@@ -32,18 +32,21 @@ public class SecurityConfig {
 
     return httpSecurity
             .httpBasic().disable()
-            .cors().configurationSource(request -> {
+            /*.cors().configurationSource(request -> {
               var cors = new CorsConfiguration();
-              cors.setAllowedOrigins(List.of("http://localhost:3000"));
+              cors.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:8080"));
               cors.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
-              cors.setAllowedHeaders(List.of("*")); return cors;
-            })
+              cors.setAllowedHeaders(List.of("*"));
+              cors.setAllowCredentials(true);
+              return cors;
+            })*/
+            .cors().configurationSource(corsConfigurationSource())
             .and()
             .csrf().disable()
             .cors().and()
             .headers().frameOptions().disable().and()
             .authorizeRequests()
-            .antMatchers("/login","/save","/getMovieSection","/getMovieList").permitAll()
+            .antMatchers("/test2","/test3","/login","/save","/getMovieSection","/getMovieList","/test").permitAll()
             .antMatchers("/api/**").authenticated()
             .anyRequest().authenticated().and()
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
@@ -53,8 +56,10 @@ public class SecurityConfig {
   @Bean
   CorsConfigurationSource corsConfigurationSource() {
     CorsConfiguration configuration = new CorsConfiguration();
-    configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-    configuration.setAllowedMethods(Arrays.asList("GET","POST"));
+    configuration.setAllowedOrigins(List.of("http://localhost:3000","http://localhost:8080"));
+    configuration.setAllowedMethods(List.of("GET","POST", "PUT", "DELETE", "OPTIONS"));
+    configuration.setAllowedHeaders(List.of("*"));
+    configuration.setAllowCredentials(true);
     // you can configure many allowed CORS headers
 
     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
