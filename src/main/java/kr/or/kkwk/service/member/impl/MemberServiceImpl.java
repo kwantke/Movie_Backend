@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
+import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -79,13 +80,20 @@ public class MemberServiceImpl implements MemberService {
   }
 
   @Override
-  public String memberLogin(MemberDto memberVo) {
-    PasswordAuthenticationToken token = new PasswordAuthenticationToken(memberVo.getId(),memberVo.getPassword());
+  public MemberDto memberLogin(MemberDto memberDto) {
+
+    PasswordAuthenticationToken token = new PasswordAuthenticationToken(memberDto.getId(),memberDto.getPassword());
     Authentication authentication = authenticationManager.authenticate(token);
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String userToken = createToken((PasswordAuthenticationToken) authentication);
 
-    return userToken;
+    Optional<MemberEntity> memberEntity = Optional.of(memberRepository.findByIdAndPassword(memberDto.getId(), memberDto.getPassword())
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+
+    MemberDto resMemberDto = memberEntity.get().toDomain();
+    resMemberDto.setToken(userToken);
+
+    return resMemberDto;
   }
 
   public String createToken(PasswordAuthenticationToken token){

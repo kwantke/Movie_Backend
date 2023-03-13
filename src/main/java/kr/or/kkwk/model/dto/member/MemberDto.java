@@ -18,6 +18,8 @@ public class MemberDto {
   String email;
   String img;
 
+  String token;
+
 
   public MemberDto(String id, String name, String password, String email, String img){
     this.id = id;
@@ -36,5 +38,7 @@ public class MemberDto {
             .email(email)
             .build();
   }
+
+
 
 }

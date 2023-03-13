@@ -24,5 +24,5 @@ public interface MemberService {
 
   List<MemberDto> getMemberList();
 
-  String memberLogin(MemberDto memberVo);
+  MemberDto memberLogin(MemberDto memberVo);
 }

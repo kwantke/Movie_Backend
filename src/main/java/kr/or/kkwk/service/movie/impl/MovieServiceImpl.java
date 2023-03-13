@@ -7,12 +7,15 @@ import kr.or.kkwk.model.dto.movie.MovieSectionDto;
 import kr.or.kkwk.model.entity.member.MemberEntity;
 import kr.or.kkwk.model.entity.movie.MovieEntity;
 import kr.or.kkwk.model.entity.movie.MovieSectionEntity;
+import kr.or.kkwk.model.entity.movie.MovieView;
 import kr.or.kkwk.repository.movie.MovieRepository;
 import kr.or.kkwk.repository.movie.MovieSectionRepository;
 import kr.or.kkwk.service.movie.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -20,6 +23,8 @@ import java.util.stream.Collectors;
 @Service
 public class MovieServiceImpl implements MovieService {
 
+  @PersistenceContext
+  private EntityManager entityManager;
   MovieSectionRepository movieSectionRepository;
 
   MovieRepository movieRepository;
@@ -52,5 +57,32 @@ public class MovieServiceImpl implements MovieService {
             .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
 
     return movieEntityList.get().stream().map(MovieEntity::toDomain).collect(Collectors.toList());
+  }
+
+  @Override
+  public MovieDto getMovieInfo(Long id) {
+    Optional<MovieEntity> movieEntity = Optional.ofNullable(movieRepository.findById(id)
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+
+    return movieEntity.get().toDomain();
+  }
+
+
+  @Override
+  public MovieDto findByMovieDtoById(int movie_id) {
+
+    String sql = "select m.id, m.img, m.name ,md.detail  from movie m\n" +
+            "inner join movie_detail md on m.id = md.movie_id\n" +
+            "where m.id = :id";
+    String sql2= "select m.id,m.img, m.name from movie m where m.id=:id ";
+    //MovieDto movieEntity = movieRepository.findMovieDtoById(movie_id);
+    /*MovieDto movieDto = (MovieDto) entityManager
+            .createNativeQuery(sql,"MyDtoMapping")
+            .setParameter("id", 2)
+            .getSingleResult();*/
+    Object movieDto =  entityManager.createNamedQuery("findByMovieDtoById")
+            .setParameter("id",2)
+            .getSingleResult();
+    return null;
   }
 }

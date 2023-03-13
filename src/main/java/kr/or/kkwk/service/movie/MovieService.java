@@ -11,4 +11,8 @@ public interface MovieService {
   List<MovieSectionDto> getMovieSectionList(MovieSectionDto movieSectionDto);
 
   List<MovieDto> getMovieList(int section);
+
+  MovieDto getMovieInfo(Long id);
+  MovieDto findByMovieDtoById(int movie_id);
+
 }

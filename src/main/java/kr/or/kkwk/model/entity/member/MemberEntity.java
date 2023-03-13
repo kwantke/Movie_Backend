@@ -55,9 +55,8 @@ public class MemberEntity {
     MemberDto memberVo = new MemberDto();
     memberVo.setId(this.id);
     memberVo.setName(this.name);
-    memberVo.setPassword(this.password);
     memberVo.setEmail(this.email);
-
+    memberVo.setImg(this.img);
     return memberVo;
   }
 

@@ -46,7 +46,7 @@ public class SecurityConfig {
             .cors().and()
             .headers().frameOptions().disable().and()
             .authorizeRequests()
-            .antMatchers("/test2","/test3","/login","/save","/getMovieSection","/getMovieList","/test").permitAll()
+            .antMatchers("/test2","/test3","/login","/save","/getMovieSection","/getMovieList","/test","/getMovieDetail").permitAll()
             .antMatchers("/api/**").authenticated()
             .anyRequest().authenticated().and()
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)

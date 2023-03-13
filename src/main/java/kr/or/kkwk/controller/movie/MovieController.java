@@ -11,12 +11,14 @@ import co.elastic.clients.transport.rest_client.RestClientTransport;
 import kr.or.kkwk.model.dto.movie.MovieDto;
 import kr.or.kkwk.model.dto.movie.MovieSectionDto;
 import kr.or.kkwk.service.movie.MovieService;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.apache.http.HttpHost;
 import org.elasticsearch.action.bulk.BulkProcessor;
 import org.elasticsearch.action.bulk.BulkRequestBuilder;
 import org.elasticsearch.client.RestClient;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -47,6 +49,10 @@ public class MovieController {
     return movieService.getMovieList(section);
   }
 
+  @GetMapping("/getMovieDetail")
+  public MovieDto getMovieDetail(Long id){
+    return movieService.getMovieInfo(id);
+  }
   @RequestMapping("/test")
   public String test() throws IOException {
 

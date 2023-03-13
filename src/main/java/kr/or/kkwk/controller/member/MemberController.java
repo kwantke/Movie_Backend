@@ -72,12 +72,12 @@ public class MemberController {
 
         return "";
     }
-
+    @ResponseBody
     @PostMapping("/login")
-    public String login(@RequestBody MemberDto memberVo) {
-        String token = memberService.memberLogin(memberVo);
+    public MemberDto login(@RequestBody MemberDto memberVo) {
+        MemberDto memberDto = memberService.memberLogin(memberVo);
 
-        return token;
+        return memberDto;
     }
 
     @PostMapping("/login2")
