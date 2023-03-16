@@ -2,6 +2,7 @@ package kr.or.kkwk.service.movie.impl;
 
 import kr.or.kkwk.common.exceptio2.ApiException;
 import kr.or.kkwk.common.exceptio2.ExceptionEnum;
+import kr.or.kkwk.model.dto.movie.ActorDto;
 import kr.or.kkwk.model.dto.movie.MovieDto;
 import kr.or.kkwk.model.dto.movie.MovieSectionDto;
 import kr.or.kkwk.model.entity.member.MemberEntity;
@@ -10,6 +11,7 @@ import kr.or.kkwk.model.entity.movie.MovieSectionEntity;
 import kr.or.kkwk.model.entity.movie.MovieView;
 import kr.or.kkwk.repository.movie.MovieRepository;
 import kr.or.kkwk.repository.movie.MovieSectionRepository;
+import kr.or.kkwk.service.movie.ActorService;
 import kr.or.kkwk.service.movie.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,11 @@ public class MovieServiceImpl implements MovieService {
   MovieSectionRepository movieSectionRepository;
 
   MovieRepository movieRepository;
+
+  @Autowired
+  ActorService actorService;
+
+
   @Autowired
   MovieServiceImpl(MovieSectionRepository movieSectionRepository, MovieRepository movieRepository){
     this.movieSectionRepository=movieSectionRepository;
@@ -63,8 +70,10 @@ public class MovieServiceImpl implements MovieService {
   public MovieDto getMovieInfo(Long id) {
     Optional<MovieEntity> movieEntity = Optional.ofNullable(movieRepository.findById(id)
             .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
-
-    return movieEntity.get().toDomain();
+    MovieDto movieDto = movieEntity.get().toDomain();
+    List<ActorDto> actorDtoList = actorService.getActorDtoList(id);
+    movieDto.setActorDtoList(actorDtoList);
+    return movieDto;
   }
 
 

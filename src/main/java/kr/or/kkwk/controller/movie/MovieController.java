@@ -51,7 +51,8 @@ public class MovieController {
 
   @GetMapping("/getMovieDetail")
   public MovieDto getMovieDetail(Long id){
-    return movieService.getMovieInfo(id);
+    MovieDto movieDto = movieService.getMovieInfo(id);
+    return movieDto;
   }
   @RequestMapping("/test")
   public String test() throws IOException {

@@ -39,7 +39,7 @@ public class MovieEntity {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private int id;
+  private Long id;
   @NotNull
   private String img;
   private String name;
@@ -69,6 +69,7 @@ public class MovieEntity {
     movieDto.setName(this.name);
     movieDto.setType(this.type);
     movieDto.setScore(this.score);
+    movieDto.setStar(this.star);
     movieDto.setSection(this.section);
     movieDto.setBgImg(this.bgImg);
     movieDto.setVideo(this.video);

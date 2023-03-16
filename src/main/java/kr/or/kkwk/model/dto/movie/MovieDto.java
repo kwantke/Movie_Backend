@@ -3,6 +3,8 @@ package kr.or.kkwk.model.dto.movie;
 import kr.or.kkwk.model.entity.movie.MovieEntity;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -10,7 +12,7 @@ import lombok.*;
 @Builder
 public class MovieDto {
 
-    private int id;
+    private Long id;
     private String img;
     private String name;
 
@@ -24,7 +26,9 @@ public class MovieDto {
 
     private String video;
     private String detail;
-    public MovieDto(int id, String img, String name, String detail/*, String type, String score, String star*/){
+
+    private List<ActorDto> actorDtoList;
+    public MovieDto(Long id, String img, String name, String detail/*, String type, String score, String star*/){
         this.id = id;
         this.img = img;
         this.name= name;
