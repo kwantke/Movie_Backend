@@ -8,7 +8,6 @@ import kr.or.kkwk.model.dto.movie.MovieSectionDto;
 import kr.or.kkwk.model.entity.member.MemberEntity;
 import kr.or.kkwk.model.entity.movie.MovieEntity;
 import kr.or.kkwk.model.entity.movie.MovieSectionEntity;
-import kr.or.kkwk.model.entity.movie.MovieView;
 import kr.or.kkwk.repository.movie.MovieRepository;
 import kr.or.kkwk.repository.movie.MovieSectionRepository;
 import kr.or.kkwk.service.movie.ActorService;
@@ -84,11 +83,6 @@ public class MovieServiceImpl implements MovieService {
             "inner join movie_detail md on m.id = md.movie_id\n" +
             "where m.id = :id";
     String sql2= "select m.id,m.img, m.name from movie m where m.id=:id ";
-    //MovieDto movieEntity = movieRepository.findMovieDtoById(movie_id);
-    /*MovieDto movieDto = (MovieDto) entityManager
-            .createNativeQuery(sql,"MyDtoMapping")
-            .setParameter("id", 2)
-            .getSingleResult();*/
     Object movieDto =  entityManager.createNamedQuery("findByMovieDtoById")
             .setParameter("id",2)
             .getSingleResult();

@@ -2,7 +2,6 @@ package kr.or.kkwk.repository.movie;
 
 import kr.or.kkwk.model.dto.movie.MovieDto;
 import kr.or.kkwk.model.entity.movie.MovieEntity;
-import kr.or.kkwk.model.entity.movie.MovieView;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
