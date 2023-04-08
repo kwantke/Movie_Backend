@@ -8,6 +8,5 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ActorRepository extends JpaRepository<ActorEntity, Long> {
-
   Optional<List<ActorEntity>> findByMovieId(@Param("movie_id")Long movieId);
 }
