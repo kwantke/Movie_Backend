@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="actor")
 public class ActorEntity {
-
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   int idx;
