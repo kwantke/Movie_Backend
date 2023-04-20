@@ -1,4 +1,4 @@
-package kr.or.kkwk.common.exceptio2;
+package kr.or.kkwk.common.exception;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -28,12 +28,6 @@ public class GlobalExceptionHandler {
     return createCustomErrorInfo(ExceptionEnum.RUNTIME_EXCEPTION.getCode(), request.getPathInfo(), e.getMessage());
 
   }
-/*  @ExceptionHandler({PSQLException.class})
-  public ResponseEntity<ApiExceptionEntity> exceptionHandler(HttpServletRequest request, final PSQLException e) {
-    //e.printStackTrace();
-    return createCustomErrorInfo(ExceptionEnum.SQL_ERROR.getCode(), request.getPathInfo(), e.getMessage());
-
-  }*/
 
   @ExceptionHandler({NoHandlerFoundException.class})
   public ResponseEntity<ApiExceptionEntity> NoHandlerFound(HttpServletRequest request, final NoHandlerFoundException e) {

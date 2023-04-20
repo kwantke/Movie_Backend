@@ -1,4 +1,4 @@
-package kr.or.kkwk.common.exceptio2;
+package kr.or.kkwk.common.exception;
 
 import lombok.Builder;
 import lombok.Getter;
