@@ -11,10 +11,11 @@ import java.util.Collection;
 @Setter
 public class PasswordAuthenticationToken extends UsernamePasswordAuthenticationToken {
 
-  private Long id;
+  private String id;
   private String account;
   private String role;
   private String name;
+  private String email;
   private String phone;
 
   public PasswordAuthenticationToken(Object principal, Object credentials) {
