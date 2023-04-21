@@ -1,8 +1,8 @@
 package kr.or.kkwk.service.member.impl;
 
 
-import kr.or.kkwk.common.exceptio2.ApiException;
-import kr.or.kkwk.common.exceptio2.ExceptionEnum;
+import kr.or.kkwk.common.exception.ApiException;
+import kr.or.kkwk.common.exception.ExceptionEnum;
 import kr.or.kkwk.common.security.JwtAuthToken;
 import kr.or.kkwk.common.security.JwtAuthTokenProvider;
 import kr.or.kkwk.common.security.PasswordAuthenticationToken;
@@ -19,7 +19,6 @@ import org.springframework.stereotype.Service;
 
 
 import javax.transaction.Transactional;
-import java.lang.reflect.Member;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
@@ -29,7 +28,6 @@ public class MemberServiceImpl implements MemberService {
 
 
   MemberRepository memberRepository;
-
   MemberMapper memberMapper;
   private final AuthenticationManager authenticationManager;
   private final JwtAuthTokenProvider tokenProvider;
@@ -44,32 +42,27 @@ public class MemberServiceImpl implements MemberService {
   @Override
   public MemberDto getMemberInfo(String id, String password) {
       Optional<MemberEntity> memberEntity = Optional.ofNullable(memberRepository.findById(id)
-              .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+              .orElseThrow(() -> new ApiException(ExceptionEnum.ERROR_0001)));
     return memberEntity.get().toDomain();
   }
 
   @Override
   public MemberDto getMemberId(String id) {
     Optional<MemberEntity> memberEntity = Optional.ofNullable(memberRepository.findById(id)
-            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ERROR_0001)));
     return memberEntity.get().toDomain();
   }
 
   @Override
   @Transactional
-  public boolean save(MemberDto memberVo) {
-    //MemberVo memberVo = new MemberVo();
-    //memberVo.setId("");
-    /*memberVo.setPassword("member3");
-    memberVo.setName("최홍익3");
-    memberVo.setEmail("chl3@gmail.com");*/
+  public boolean save(MemberDto memberDto) {
 
-    if(!memberRepository.existsById(memberVo.getId())){
-      MemberEntity saveMember = memberVo.saveMember();
+    if(!memberRepository.existsById(memberDto.getId())){
+      MemberEntity saveMember = memberDto.saveMember();
 
       memberRepository.save(saveMember);
     } else{
-      throw new ApiException(ExceptionEnum.ZERO_03);
+      throw new ApiException(ExceptionEnum.ERROR_0002);
     }
       return true;
   }
@@ -86,9 +79,10 @@ public class MemberServiceImpl implements MemberService {
     Authentication authentication = authenticationManager.authenticate(token);
     SecurityContextHolder.getContext().setAuthentication(authentication);
     String userToken = createToken((PasswordAuthenticationToken) authentication);
+    userToken = userToken.substring(9,userToken.length()-1);
 
     Optional<MemberEntity> memberEntity = Optional.of(memberRepository.findByIdAndPassword(memberDto.getId(), memberDto.getPassword())
-            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ERROR_0001)));
 
     MemberDto resMemberDto = memberEntity.get().toDomain();
     resMemberDto.setToken(userToken);
@@ -99,9 +93,9 @@ public class MemberServiceImpl implements MemberService {
   public String createToken(PasswordAuthenticationToken token){
     Date expiredDate = Date.from(LocalDateTime.now().plusMinutes(180).atZone(ZoneId.systemDefault()).toInstant());
     Map<String, String> claims = new HashMap<>();
-    claims.put("id", token.getId().toString());
-    claims.put("name", token.getName().toString());
-    claims.put("role", token.getRole().toString());
+    claims.put("id", token.getId());
+    claims.put("email", token.getEmail());
+    /*claims.put("role", token.getRole());*/
 
     JwtAuthToken jwtAuthToken = tokenProvider.createAuthToken(
             token.getPrincipal().toString(),

@@ -17,47 +17,42 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Builder
-@Table(name="member")
+@Table(name="MEMBER")
 public class MemberEntity {
 // Entity는 jpa가 관리하는 객체
   @Id
-  @Column(name="id", nullable=false)
+  @Column(name="ID", nullable=false)
   @NotBlank
   private String id;
 
-  @Column(name="name")
+  @Column(name="NAME")
   @NotBlank
   private String name;
 
-  @Column(name="role")
-  private String role;
-
-  @Column(name="password")
+  @Column(name="PASSWORD")
   private String password;
 
-  @Column(name="email")
+  @Column(name="EMAIL")
   private String email;
 
-  @Column(name="img")
+  @Column(name="ROLE")
+  private String role;
+
+  @Column(name="IMG")
   private String img;
 
-
-
-
-
-  public MemberEntity(MemberDto memberVo){
-    BeanUtils.copyProperties(memberVo, this);
+  public MemberEntity(MemberDto memberDto){
+    BeanUtils.copyProperties(memberDto, this);
   }
 
-
-
   public MemberDto toDomain(){
-    MemberDto memberVo = new MemberDto();
-    memberVo.setId(this.id);
-    memberVo.setName(this.name);
-    memberVo.setEmail(this.email);
-    memberVo.setImg(this.img);
-    return memberVo;
+    MemberDto memberDto = new MemberDto();
+    memberDto.setId(this.id);
+    memberDto.setName(this.name);
+    memberDto.setEmail(this.email);
+    memberDto.setRole(this.role);
+    memberDto.setImg(this.img);
+    return memberDto;
   }
 
 }
