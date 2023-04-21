@@ -1,4 +1,4 @@
-package kr.or.kkwk.common.exption;
+package kr.or.kkwk.common.exption3;
 
 public class NotFoundException extends RuntimeException{
 

@@ -12,22 +12,24 @@ import javax.validation.constraints.NotNull;
 public class MemberDto {
 
   String id;
-  @NotNull
   String name;
   String password;
   String email;
   String img;
+  String role;
 
   String token;
 
 
-  public MemberDto(String id, String name, String password, String email, String img){
+/*
+  public MemberDto(String id, String name, String password, String email, String role, String img, String token){
     this.id = id;
     this.name = name;
     this.password = password;
     this.email = email;
     this.img = img;
   }
+*/
 
 
   public MemberEntity saveMember(){
@@ -36,6 +38,8 @@ public class MemberDto {
             .name(name)
             .password(password)
             .email(email)
+            .role(role)
+            .img(img)
             .build();
   }
 

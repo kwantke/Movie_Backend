@@ -1,11 +1,11 @@
 package kr.or.kkwk.service.movie.impl;
 
-import kr.or.kkwk.common.exceptio2.ApiException;
-import kr.or.kkwk.common.exceptio2.ExceptionEnum;
+
+import kr.or.kkwk.common.exception.ApiException;
+import kr.or.kkwk.common.exception.ExceptionEnum;
 import kr.or.kkwk.model.dto.movie.ActorDto;
 import kr.or.kkwk.model.dto.movie.MovieDto;
 import kr.or.kkwk.model.dto.movie.MovieSectionDto;
-import kr.or.kkwk.model.entity.member.MemberEntity;
 import kr.or.kkwk.model.entity.movie.MovieEntity;
 import kr.or.kkwk.model.entity.movie.MovieSectionEntity;
 import kr.or.kkwk.repository.movie.MovieRepository;
@@ -60,7 +60,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public List<MovieDto> getMovieList(int section) {
     Optional<List<MovieEntity>> movieEntityList = Optional.ofNullable(movieRepository.findBySection(section)
-            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ERROR_0001)));
 
     return movieEntityList.get().stream().map(MovieEntity::toDomain).collect(Collectors.toList());
   }
@@ -68,7 +68,7 @@ public class MovieServiceImpl implements MovieService {
   @Override
   public MovieDto getMovieInfo(Long id) {
     Optional<MovieEntity> movieEntity = Optional.ofNullable(movieRepository.findById(id)
-            .orElseThrow(() -> new ApiException(ExceptionEnum.ZERO_01)));
+            .orElseThrow(() -> new ApiException(ExceptionEnum.ERROR_0001)));
     MovieDto movieDto = movieEntity.get().toDomain();
     List<ActorDto> actorDtoList = actorService.getActorDtoList(id);
     movieDto.setActorDtoList(actorDtoList);
@@ -83,6 +83,11 @@ public class MovieServiceImpl implements MovieService {
             "inner join movie_detail md on m.id = md.movie_id\n" +
             "where m.id = :id";
     String sql2= "select m.id,m.img, m.name from movie m where m.id=:id ";
+    //MovieDto movieEntity = movieRepository.findMovieDtoById(movie_id);
+    /*MovieDto movieDto = (MovieDto) entityManager
+            .createNativeQuery(sql,"MyDtoMapping")
+            .setParameter("id", 2)
+            .getSingleResult();*/
     Object movieDto =  entityManager.createNamedQuery("findByMovieDtoById")
             .setParameter("id",2)
             .getSingleResult();

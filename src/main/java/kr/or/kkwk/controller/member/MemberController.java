@@ -2,10 +2,13 @@ package kr.or.kkwk.controller.member;
 
 
 
-import kr.or.kkwk.common.exceptio2.ApiException;
-import kr.or.kkwk.common.exceptio2.ExceptionEnum;
+import kr.or.kkwk.common.exception.ApiException;
+import kr.or.kkwk.common.exception.ExceptionEnum;
+import kr.or.kkwk.controller.RestResponseEntity;
 import kr.or.kkwk.model.dto.member.MemberDto;
 import kr.or.kkwk.service.member.MemberService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,23 +39,32 @@ public class MemberController {
     public MemberController(MemberService memberService){
         this.memberService = memberService;
     }
-    @RequestMapping("/")
-    public void goDomain(){
-        System.out.println("");
 
-
+    @PostMapping("/save")
+    public ResponseEntity saveMeber(@RequestBody MemberDto memberVo){
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberService.save(memberVo));
+    }
+    @PostMapping("/login")
+    public ResponseEntity login(@RequestBody MemberDto memberVo) {
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberService.memberLogin(memberVo));
     }
 
     /**
-     * EntityManagerFactory 생성
+     * TDD Test 케이스 생성
      *
      * @param
      * @return
      */
     @GetMapping("/getMember")
-    public MemberDto getMember(){
-        MemberDto memberVo = memberService.getMemberId("admin");
-        return memberVo;
+    public ResponseEntity getMember(){
+
+        return ResponseEntity
+                .status(HttpStatus.OK)
+                .body(memberService.getMemberId("admin"));
 
     }
 
@@ -61,36 +73,9 @@ public class MemberController {
         //throw new NotFoundException("예외 처리");
         MemberDto memberVo1 = memberService.getMemberId(memberVo.getId());
         if(memberVo1 == null){
-            throw new ApiException(ExceptionEnum.ZERO_01);
+            throw new ApiException(ExceptionEnum.ERROR_0001);
         }
         return memberVo1;
     }
-
-    @RequestMapping("/save")
-    public String saveMeber(@Valid MemberDto memberVo){
-        memberService.save(memberVo);
-
-        return "";
-    }
-    @ResponseBody
-    @PostMapping("/login")
-    public MemberDto login(@RequestBody MemberDto memberVo) {
-        MemberDto memberDto = memberService.memberLogin(memberVo);
-
-        return memberDto;
-    }
-
-    @PostMapping("/login2")
-    public String login2(@RequestBody MemberDto memberVo) {
-       // String token = memberService.memberLogin(memberVo);
-
-        return "test";
-    }
-
-    /*@RequestMapping("/getSection")
-    public MovieSectionDto getSection(){
-        return
-    }
-*/
 
 }
