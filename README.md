@@ -5,3 +5,4 @@
 - Java17
 - MYSQL
 - JWT Token 사용, Global Exception 적용
+- Dokerfile 및 Jenkins Pipeline 구성
