@@ -16,7 +16,7 @@ public interface MovieRepository extends JpaRepository<MovieEntity, Long> {
 
   Optional<List<MovieEntity>> findBySection(@Param("section")int section);
 
-
+  Optional<List<MovieEntity>> findByNameContaining(@Param("name")String name);
   @Query(value="SELECT new kr.or.kkwk.model.dto.movie.MovieDto(m.id,m.img, m.name,m.type, m.score,m.star) " +
           " FROM movie m " +
           " WHERE m.id = :id", nativeQuery = true

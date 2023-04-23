@@ -75,6 +75,12 @@ public class MovieServiceImpl implements MovieService {
     return movieDto;
   }
 
+  @Override
+  public List<MovieDto> getSearchMovie(String searchData) {
+    Optional<List<MovieEntity>> searchMovieList = Optional.ofNullable(movieRepository.findByNameContaining(searchData)
+            .orElseThrow(()-> new ApiException(ExceptionEnum.ERROR_0001)));
+    return searchMovieList.get().stream().map(MovieEntity::toDomain).collect(Collectors.toList());
+  }
 
   @Override
   public MovieDto findByMovieDtoById(int movie_id) {
@@ -93,4 +99,6 @@ public class MovieServiceImpl implements MovieService {
             .getSingleResult();
     return null;
   }
+
+
 }

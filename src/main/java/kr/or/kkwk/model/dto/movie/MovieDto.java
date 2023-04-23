@@ -15,15 +15,11 @@ public class MovieDto {
     private Long id;
     private String img;
     private String name;
-
     private String type;
     private String score;
-
     private String star;
     private int section;
-
     private String bgImg;
-
     private String video;
     private String detail;
 

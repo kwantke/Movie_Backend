@@ -5,6 +5,7 @@ package kr.or.kkwk.controller.movie;
 import kr.or.kkwk.model.dto.movie.MovieSectionDto;
 import kr.or.kkwk.service.movie.MovieService;
 import lombok.RequiredArgsConstructor;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,14 @@ public class MovieController {
     return ResponseEntity
             .status(HttpStatus.OK)
             .body(movieService.getMovieInfo(id));
+  }
+
+  @GetMapping("/getSearchMovie")
+  public ResponseEntity getSearchMovie(@Param("searchData") String searchData){
+
+    return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(movieService.getSearchMovie(searchData));
   }
 
 }

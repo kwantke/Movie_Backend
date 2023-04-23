@@ -15,4 +15,6 @@ public interface MovieService {
   MovieDto getMovieInfo(Long id);
   MovieDto findByMovieDtoById(int movie_id);
 
+  List<MovieDto> getSearchMovie(String searchData);
+
 }

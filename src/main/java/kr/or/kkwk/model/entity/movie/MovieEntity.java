@@ -43,7 +43,6 @@ public class MovieEntity {
   @NotNull
   private String img;
   private String name;
-
   private String type;
   private String score;
 
