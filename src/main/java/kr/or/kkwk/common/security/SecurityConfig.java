@@ -41,7 +41,11 @@ public class SecurityConfig {
             .antMatchers("/login","/save").permitAll()
             .antMatchers("/api/**").authenticated()
             .anyRequest().authenticated().and()
+            .exceptionHandling()
+            .authenticationEntryPoint(new CustomAuthenticationEntryPoint())
+            .and()
             .addFilterBefore(new JwtFilter(tokenProvider), UsernamePasswordAuthenticationFilter.class)
+
             .build();
     //,"/getMovieSection","/getMovieList","/getMovieDetail"
   }

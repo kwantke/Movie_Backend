@@ -49,19 +49,8 @@ public class JwtAuthToken implements AuthToken<Claims>{
 
   @Override
   public Claims getData() {
-    try {
+
       return Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token).getBody();
-    } catch (SecurityException e){
-      log.info("Invalid JWT signature.");
-    } catch (MalformedJwtException e) {
-      log.info("Invalid JWT token");
-    } catch (ExpiredJwtException e) {
-      log.info("Expired JWT token");
-    } catch (UnsupportedJwtException e){
-      log.info("Unsupported JWT token.");
-    } catch (IllegalArgumentException e) {
-      log.info("JWT toekn compact of handler are invalid.");
-    }
-    return null;
+
   }
 }
