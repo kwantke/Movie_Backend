@@ -13,10 +13,13 @@ import lombok.NoArgsConstructor;
 @Builder
 public class ActorDto {
 
+  /**배우 INDEX*/
   int idx;
+  /**영화 ID*/
   Long movieId;
-
+  /**배우 이름*/
   String actorName;
+  /**배우 이미지*/
   String actorImg;
 
   public ActorEntity toEntity(){
